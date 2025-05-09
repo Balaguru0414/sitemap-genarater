@@ -1,0 +1,340 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sitemap Generator</title>
+  <style>
+    body {
+      background: #eef3fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+    }
+
+    .card h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      background: #f1f3f5;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group span {
+      margin-right: 0.5rem;
+      color: #777;
+    }
+
+    .form-group input {
+      border: none;
+      outline: none;
+      background: transparent;
+      flex-grow: 1;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #5a41f5;
+      color: white;
+      padding: 0.75rem;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #4532c4;
+    }
+
+    .status {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .error {
+      background: #fdecea;
+      color: #d32f2f;
+    }
+
+    .success {
+      background: #e6f4ea;
+      color: #2e7d32;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    a {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🧭 Sitemap Generator</h1>
+    <form id="sitemapForm">
+      <div class="form-group">
+        <span>https://</span>
+        <input type="text" id="url" placeholder="yourdomain.com" required />
+      </div>
+      <button type="submit">Generate Sitemap</button>
+    </form>
+    <div id="status" class="status"></div>
+    <div class="footer">Generate XML sitemaps for better SEO optimization</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('sitemapForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'status';
+      status.textContent = 'Generating sitemap...';
+
+      let input = document.getElementById('url').value.trim();
+      if (!input.startsWith('http')) {
+        input = 'https://' + input;
+      }
+
+      try {
+        const response = await fetch('/generate-sitemap', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: input })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          status.classList.add('success');
+          status.innerHTML = `✅ Sitemap generated at <a href="${data.path}" target="_blank">${data.path}</a>`;
+        } else {
+          status.classList.add('error');
+          status.textContent = data.message || 'Failed to generate sitemap.';
+        }
+      } catch (err) {
+        status.classList.add('error');
+        status.textContent = 'An error occurred. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sitemap Generator</title>
+  <style>
+    body {
+      background: #eef3fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+    }
+
+    .card h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      background: #f1f3f5;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group span {
+      margin-right: 0.5rem;
+      color: #777;
+    }
+
+    .form-group input {
+      border: none;
+      outline: none;
+      background: transparent;
+      flex-grow: 1;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #5a41f5;
+      color: white;
+      padding: 0.75rem;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #4532c4;
+    }
+
+    .status {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .error {
+      background: #fdecea;
+      color: #d32f2f;
+    }
+
+    .success {
+      background: #e6f4ea;
+      color: #2e7d32;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #5a41f5;
+      border-radius: 50%;
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-8px);
+        opacity: 0.6;
+      }
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    a {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🧭 Sitemap Generator</h1>
+    <form id="sitemapForm">
+      <div class="form-group">
+        <span>https://</span>
+        <input type="text" id="url" placeholder="yourdomain.com" required />
+      </div>
+      <button type="submit">Generate Sitemap</button>
+    </form>
+    <div id="status" class="status"></div>
+    <div class="footer">Generate XML sitemaps for better SEO optimization</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('sitemapForm');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'status';
+      status.innerHTML = `
+        <div class="loading">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <span style="margin-left: 10px;">Generating sitemap...</span>
+        </div>
+      `;
+
+      let input = document.getElementById('url').value.trim();
+      if (!input.startsWith('http')) {
+        input = 'https://' + input;
+      }
+
+      try {
+        const response = await fetch('/generate-sitemap', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: input })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          status.className = 'status success';
+          status.innerHTML = `✅ Sitemap generated at <a href="${data.path}" target="_blank">${data.path}</a>`;
+        } else {
+          status.className = 'status error';
+          status.textContent = data.message || 'Failed to generate sitemap.';
+        }
+      } catch (err) {
+        status.className = 'status error';
+        status.textContent = 'An error occurred. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
